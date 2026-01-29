@@ -40,19 +40,37 @@
 
 // IIFE  - Immediately Invoked Function Expression
 
-// Swiper js ka code
+// Swiper js ka code - Only enable on screens wider than 767px
+var swiper = null;
 
-var swiper = new Swiper(".mySwiper", {
-  slidesPerView: "auto",
-  pagination: {
-    el: ".swiper-pagination",
-    type: "fraction",
-  },
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
+function initSwiper() {
+  if (window.innerWidth > 767) {
+    if (!swiper) {
+      swiper = new Swiper(".mySwiper", {
+        slidesPerView: "auto",
+        pagination: {
+          el: ".swiper-pagination",
+          type: "fraction",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    }
+  } else {
+    if (swiper) {
+      swiper.destroy(true, true);
+      swiper = null;
+    }
+  }
+}
+
+// Initialize on load
+initSwiper();
+
+// Re-check on resize
+window.addEventListener("resize", initSwiper);
 
 var tl = gsap.timeline();
 tl.from("#page1 svg", {
@@ -108,26 +126,29 @@ gsap.to("#page2 #svg2,#page2 #svg3", {
   },
 });
 
-var tl2 = gsap.timeline({
-  scrollTrigger: {
-    trigger: "#page5",
-    scroller: "#main",
-    // markers: true,
-    start: "top 60%",
-    end: "top 40%",
-    scrub: 3,
-  },
-});
-tl2.to("#page5-left", {
-  transform: `translateX(-50%)`,
-  duration: 1,
-},"page5-anim");
-tl2.to("#page5-right", {
-  transform: `translateX(50%)`,
-  duration: 1,
-},"page5-anim");
-tl2.from("#page5-center", {
-  transform: `translateY(10%)`,
-  duration: 1,
-  opacity:0,
-},"page5-anim");
+// Page 5 animations - Only on desktop (wider than 1024px)
+if (window.innerWidth > 1024) {
+  var tl2 = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#page5",
+      scroller: "#main",
+      // markers: true,
+      start: "top 60%",
+      end: "top 40%",
+      scrub: 3,
+    },
+  });
+  tl2.to("#page5-left", {
+    transform: `translateX(-50%)`,
+    duration: 1,
+  },"page5-anim");
+  tl2.to("#page5-right", {
+    transform: `translateX(50%)`,
+    duration: 1,
+  },"page5-anim");
+  tl2.from("#page5-center", {
+    transform: `translateY(10%)`,
+    duration: 1,
+    opacity:0,
+  },"page5-anim");
+}
