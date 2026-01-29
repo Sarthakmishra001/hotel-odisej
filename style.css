@@ -284,7 +284,7 @@ body {
 #page4 {
   height: 100vh;
   width: 100%;
-  background-color: burlywood;
+  background-color: #f7f7ee;
 }
 
 .swiper {
@@ -295,7 +295,7 @@ body {
 .swiper-slide {
   text-align: center;
   font-size: 1.125rem;
-  background: #fff;
+  background: transparent;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -307,9 +307,6 @@ body {
   align-items: center;
 }
 
-.swiper-slide:nth-last-child(1) {
-  width: 20%;
-}
 
 .swiper-slide img {
   display: block;
@@ -321,6 +318,7 @@ body {
   -ms-transform: scale(0.6) translateX(-40%) translateY(34%);
   transform: scale(0.6) translateX(-40%) translateY(34%);
   border-radius: 1.25rem;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .swiper-slide {
@@ -903,9 +901,6 @@ body {
     margin-bottom: 4vw;
   }
 
-  .swiper-slide:nth-last-child(1) {
-    display: none;
-  }
 
   .swiper-slide img {
     transform: none;

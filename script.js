@@ -48,6 +48,10 @@ function initSwiper() {
     if (!swiper) {
       swiper = new Swiper(".mySwiper", {
         slidesPerView: "auto",
+        centeredSlides: true,
+        loop: true,
+        loopedSlides: 3,
+        speed: 1000,
         pagination: {
           el: ".swiper-pagination",
           type: "fraction",
